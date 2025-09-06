@@ -3,6 +3,20 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --transition-time: 0.2s;
+}
+
+/* Smooth theme transitions */
+html {
+  transition: background-color var(--transition-time) ease, color var(--transition-time) ease;
+}
+
+/* Disable transitions when toggling theme */
+html.no-transition,
+html.no-transition *,
+html.no-transition *::before,
+html.no-transition *::after {
+  transition: none !important;
 }
 
 @theme inline {
