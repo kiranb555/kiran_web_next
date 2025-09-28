@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 import PhotoSlider from "../PhotoSlider";
 
 const photographyPhotos = [
-  "/photos/photo1.jpg",
-  "/photos/photo2.jpg",
-  "/photos/photo3.jpg",
+  "/photos/photo1.jpeg",
+  "/photos/photo2.jpeg",
+  "/photos/photo3.jpeg",
 ];
 
 const Hobby = () => {
@@ -24,7 +24,7 @@ const Hobby = () => {
           A Glimpse of My World
         </h3>
         <p className="text-gray-600 dark:text-gray-300 mb-6">
-          When I'm not coding, you'll find me exploring new places with my
+          When I&apos;m not coding, you&apos;ll find me exploring new places with my
           camera or cycling through scenic routes. I believe that maintaining a
           balance between work and personal interests leads to greater
           creativity and productivity.
@@ -46,7 +46,7 @@ const Hobby = () => {
             <PhotoSlider photos={photographyPhotos} />
           </div>
           <p className="text-center text-gray-600 dark:text-gray-300 mt-4">
-            A collection of moments I've captured on my travels and adventures.
+            A collection of moments I&apos;ve captured on my travels and adventures.
           </p>
         </motion.div>
       </div>

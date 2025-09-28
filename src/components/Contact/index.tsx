@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiSend, FiUser, FiMail, FiMessageSquare } from 'react-icons/fi';
@@ -12,32 +11,70 @@ const Contact = () => {
     message: ''
   });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Basic validation
+    if (!formData.name || !formData.email || !formData.message) {
+      setStatus('error');
+      setErrorMessage('Please fill in all fields');
+      setTimeout(() => setStatus('idle'), 3000);
+      return;
+    }
+
+    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      setStatus('error');
+      setErrorMessage('Please enter a valid email address');
+      setTimeout(() => setStatus('idle'), 3000);
+      return;
+    }
+
     setStatus('sending');
     
     try {
-      // Replace with your form submission logic
-      // Example: await submitForm(formData);
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
-      setStatus('success');
-      setFormData({ name: '', email: '', message: '' });
-      setTimeout(() => setStatus('idle'), 3000);
+      const response = await fetch('/api/sendMail', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+        
+        // In development, log the preview URL
+        if (process.env.NODE_ENV === 'development' && data.previewUrl) {
+          console.log('Email preview:', data.previewUrl);
+        }
+        
+        setTimeout(() => setStatus('idle'), 3000);
+      } else {
+        throw new Error(data.message || 'Failed to send message');
+      }
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error('Error:', error);
       setStatus('error');
+      setErrorMessage(error instanceof Error ? error.message : 'Something went wrong. Please try again.');
       setTimeout(() => setStatus('idle'), 3000);
     }
   };
 
   return (
-    <section id="contact" className="py-20 dark:bg-gray-950">
+    <section className="py-2 dark:bg-gray-950">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-12">
           <span className="text-sm font-medium text-amber-600 dark:text-amber-400">
@@ -70,6 +107,7 @@ const Contact = () => {
                 required
                 className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent transition"
                 placeholder="Your name"
+                disabled={status === 'sending'}
               />
             </div>
 
@@ -86,6 +124,7 @@ const Contact = () => {
                 required
                 className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent transition"
                 placeholder="your.email@example.com"
+                disabled={status === 'sending'}
               />
             </div>
 
@@ -103,18 +142,19 @@ const Contact = () => {
                 required
                 className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent transition resize-none"
                 placeholder="Your message here..."
+                disabled={status === 'sending'}
               ></textarea>
             </div>
 
             <div className="pt-2">
-              <button
+              <motion.button
                 type="submit"
                 disabled={status === 'sending'}
-                className={`w-full flex items-center justify-center px-6 py-3 rounded-lg font-medium text-white ${
-                  status === 'sending'
-                    ? 'bg-gray-400 dark:bg-gray-600 cursor-not-allowed'
-                    : 'bg-amber-600 hover:bg-amber-700'
-                } transition-colors`}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className={`w-full flex items-center justify-center px-6 py-3 rounded-lg font-medium text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition-colors ${
+                  status === 'sending' ? 'opacity-70 cursor-not-allowed' : ''
+                }`}
               >
                 {status === 'sending' ? (
                   'Sending...'
@@ -123,7 +163,7 @@ const Contact = () => {
                     <FiSend className="mr-2" /> Send Message
                   </>
                 )}
-              </button>
+              </motion.button>
 
               {status === 'success' && (
                 <motion.p
@@ -141,80 +181,11 @@ const Contact = () => {
                   animate={{ opacity: 1, y: 0 }}
                   className="mt-4 text-center text-red-600 dark:text-red-400 text-sm"
                 >
-                  Oops! Something went wrong. Please try again.
+                  {errorMessage}
                 </motion.p>
               )}
             </div>
           </form>
-          
-          {/* Freelance Contact Section */}
-          <div className="mt-16 pt-10 border-t border-gray-200 dark:border-gray-800">
-            <div className="text-center mb-8">
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                Freelance Inquiries
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                I'm currently available for freelance projects. Let's discuss how I can help bring your ideas to life.
-              </p>
-            </div>
-            
-            <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-              <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-sm border border-gray-100 dark:border-gray-800">
-                <div className="w-12 h-12 bg-amber-50 dark:bg-amber-900/20 rounded-full flex items-center justify-center mb-4 mx-auto">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M12 18h.01" />
-                  </svg>
-                </div>
-                <h4 className="font-medium text-gray-900 dark:text-white text-center mb-2">Project Types</h4>
-                <ul className="text-sm text-gray-600 dark:text-gray-300 space-y-1 text-center">
-                  <li>• Web Applications</li>
-                  <li>• Frontend Development</li>
-                  <li>• UI/UX Implementation</li>
-                </ul>
-              </div>
-              
-              <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-sm border border-gray-100 dark:border-gray-800">
-                <div className="w-12 h-12 bg-amber-50 dark:bg-amber-900/20 rounded-full flex items-center justify-center mb-4 mx-auto">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <h4 className="font-medium text-gray-900 dark:text-white text-center mb-2">Availability</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-300 text-center">
-                  Currently accepting new projects with a 2-3 week lead time. Let's discuss your timeline.
-                </p>
-              </div>
-              
-              <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-sm border border-gray-100 dark:border-gray-800">
-                <div className="w-12 h-12 bg-amber-50 dark:bg-amber-900/20 rounded-full flex items-center justify-center mb-4 mx-auto">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <h4 className="font-medium text-gray-900 dark:text-white text-center mb-2">Get in Touch</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-300 text-center mb-3">
-                  For freelance inquiries, please include:
-                </p>
-                <ul className="text-xs text-gray-500 dark:text-gray-400 space-y-1 text-center">
-                  <li>• Project scope & requirements</li>
-                  <li>• Timeline expectations</li>
-                  <li>• Budget range</li>
-                </ul>
-              </div>
-            </div>
-            
-            <div className="mt-10 text-center">
-              <a 
-                href={`mailto:${EMAIL}`}
-                className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition-colors"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-                Email for Freelance Work
-              </a>
-            </div>
-          </div>
         </motion.div>
       </div>
     </section>

@@ -43,7 +43,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100`}>
         <Providers>
-          <div className="min-h-screen bg-white dark:bg-gray-900">
+          <div className="min-h-screen dark:bg-gray-900">
             <Header />
             <main className="bg-inherit text-inherit">
               {children}

@@ -49,7 +49,7 @@ const Experience = () => {
   ];
 
   return (
-    <section id="experience" className="min-h-screen flex items-center py-16 md:py-24 dark:bg-transparent">
+    <section id="experience" className="py-20 flex items-center dark:bg-transparent">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

@@ -11,27 +11,13 @@ const Home = () => {
   return (
     <div className="relative">
       <ParticlesBackground />
-      <section className="min-h-[80vh] md:min-h-screen py-12 md:py-0">
         <Banner />
-      </section>
-      
-      <section className="min-h-[80vh] md:min-h-screen py-12 md:py-0">
-        <About />
-      </section>
-      
-      <section className="min-h-[80vh] md:min-h-screen py-12 md:py-0">
+        <About /> 
         <Experience />
-      </section>
-      
-      <section className="min-h-[80vh] md:min-h-screen py-12 md:py-0">
         <Awards />
-      </section>
-      
-      <section className="py-12 md:py-20">
         <Contact />
-      </section>
-      <Hobby />
-      <Footer />
+        <Hobby />
+        <Footer />
     </div>
   );
 }

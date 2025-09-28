@@ -5,12 +5,16 @@ import Image from "next/image";
 
 const About = () => {
   // Replace these with your actual photo paths
-  const profilePhoto = "/profile.jpg"; // Add your profile photo to public folder
+  const profilePhoto = "/photos/profile.jpeg"; // Add your profile photo to public folder
+
+  const getExperience = () => {
+    return new Date().getFullYear() - 2018;
+  };
 
   return (
     <section
       id="about"
-      className="min-h-screen flex items-center py-16 dark:bg-transparent"
+      className="flex items-center py-16 dark:bg-transparent"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -29,11 +33,11 @@ const About = () => {
               </h2>
               <div className="prose prose-lg dark:prose-invert">
                 <p className="text-gray-600 dark:text-gray-300 mb-4">
-                  Hello! I'm a{" "}
+                  Hello! I&apos;m a{" "}
                   <span className="text-amber-600 dark:text-amber-400 font-medium">
-                    Senior Software Developer
-                  </span>{" "}
-                  with over 7 years of experience in building robust, scalable
+                    Senior Software Developer&nbsp;
+                  </span>
+                  with over {getExperience()} years of experience in building robust, scalable
                   web applications. My journey in technology began with a deep
                   curiosity about how things work, which led me to pursue a
                   career where I could turn ideas into reality through code.
@@ -42,39 +46,41 @@ const About = () => {
                   My expertise lies in modern JavaScript frameworks,
                   particularly <span className="font-medium">React</span> and{" "}
                   <span className="font-medium">Node.js</span>, with a strong
-                  focus on creating seamless user experiences. I'm passionate
+                  focus on creating seamless user experiences. I&apos;m passionate
                   about clean code, performance optimization, and implementing
                   best practices in software development.
                 </p>
                 <p className="text-gray-600 dark:text-gray-300">
                   What excites me most about technology is its potential to
-                  solve real-world problems. I'm particularly interested in{" "}
+                  solve real-world problems. I&apos;m particularly interested in{" "}
                   <span className="font-medium">
                     progressive web applications
                   </span>
                   , <span className="font-medium">cloud architecture</span>, and{" "}
-                  <span className="font-medium">developer experience</span>.
+                  <span className="font-medium" id="technologies">developer experience</span>.
                 </p>
               </div>
             </div>
 
             {/* Profile Photo */}
-            <div className="w-full lg:w-1/3 flex justify-center lg:justify-end">
+            <div className="w-full lg:w-1/3 flex justify-center lg:justify-end lg:mb-5 mb-20">
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
+                whileHover={{ scale: 1.05 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="relative w-64 h-64 lg:w-72 lg:h-72"
+                transition={{ duration: 0.3 }}
+                className="relative w-64 h-64 lg:w-72 lg:h-72 group overflow-hidden rounded-lg"
               >
                 <Image
                   src={profilePhoto}
                   alt="Kiran B - Profile"
                   width={288}
                   height={288}
-                  className="w-full h-full object-cover rounded-lg shadow-lg border-4 border-amber-500/20"
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-150"
                   priority
                 />
+                <div className="absolute inset-0 border-4 border-amber-500/20 rounded-lg group-hover:border-amber-500/30 transition-all duration-300" />
               </motion.div>
             </div>
           </div>
@@ -91,7 +97,7 @@ const About = () => {
                 Technologies I Work With
               </h3>
               <p className="text-gray-600 dark:text-gray-400">
-                Tools and technologies I'm proficient in
+                Tools and technologies I&apos;m proficient in
               </p>
             </div>
 
@@ -252,11 +258,10 @@ const About = () => {
                 <ul className="space-y-2">
                   {[
                     "Git",
-                    "GitHub",
-                    "GitLab",
+                    "Bitbucket",
                     "CI/CD",
-                    "Jest",
-                    "Cypress",
+                    "React Testing Library",
+                    "Playwright",
                     "Jira",
                     "Agile/Scrum",
                   ].map((tech) => (

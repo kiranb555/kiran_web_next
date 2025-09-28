@@ -53,7 +53,7 @@ const Footer = () => {
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div className="md:col-span-2">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Your Name</h3>
+            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">Kiran</h3>
             <p className="text-gray-600 dark:text-gray-400 mb-4">
               Full Stack Developer passionate about creating elegant solutions to complex problems.
             </p>
