@@ -8,37 +8,37 @@ import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 const awards = [
     {
       id: 1,
-      title: "Outstanding Performance Award",
+      title: "Digital Performance Award",
       issuer: "Lowe's Companies, Inc.",
-      date: "2022",
-      description: "Recognized for exceptional contributions to the development of the e-commerce platform that resulted in a 30% increase in user engagement.",
+      date: "2024",
+      description: "Awarded for my front-end contributions to the lowes.com WISMO team, where I played an instrumental role in developing key pages for both Pro and DIY customers, including buy-again, order history, order details, and check order status pages, while also leading performance optimization efforts.",
       image: "/awards/Award1.png",
       color: "border-blue-500"
     },
     {
       id: 2,
-      title: "Innovation Champion",
+      title: "Outstanding Performance Award",
       issuer: "Lowe's Companies, Inc.",
-      date: "2020",
-      description: "Awarded for developing an innovative payment processing solution that reduced transaction time by 40%.",
+      date: "2023",
+      description: "Earned a spot recognition for my key role in migrating the Notification Center from the order history page to the master header, a project I spearheaded to achieve better performance and a more maintainable codebase.",
       image: "/awards/Award2.png",
       color: "border-emerald-500"
     },
     {
       id: 3,
-      title: "Best Project Award",
+      title: "Exceptional Project Delivery Award",
       issuer: "Lowe's Companies, Inc.",
-      date: "2018",
-      description: "Recognized for outstanding contribution to a critical project delivered ahead of schedule.",
+      date: "2022",
+      description: "Recognized with an award for my outstanding contribution to a critical project delivered ahead of schedule. This was in recognition of my consistent embodiment of Lowe's core behaviors: focusing on the customer, delivering results, taking action, continious learning and show courage.",
       image: "/awards/Award3.png",
       color: "border-amber-500"
     },
     {
       id: 4,
-      title: "Tech Excellence Award",
+      title: "Migration Excellence Award",
       issuer: "Lowe's Companies, Inc.",
       date: "2021",
-      description: "Acknowledged for technical excellence in implementing scalable cloud architecture solutions.",
+      description: "Awarded a spot recognition for my contributions to the lowes.ca P1 migration. I played a crucial role in the successful development and transition of the Product Listing, Product Detail, and Department List pages",
       image: "/awards/Award4.png",
       color: "border-blue-500"
     }
@@ -92,9 +92,17 @@ const Awards = () => {
 
           {/* Awards grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-12">
-            {currentAwards.map((award) => (
+            {currentAwards.map(({
+              id,
+              title,
+              issuer,
+              date,
+              description,
+              image,
+              color
+            }) => (
               <motion.div
-                key={award.id}
+                key={id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -104,8 +112,8 @@ const Awards = () => {
                 <div className="flex flex-col h-full bg-white dark:bg-gray-900 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
                   <div className="relative h-48">
                     <Image
-                      src={award.image}
-                      alt={award.title}
+                      src={image}
+                      alt={title}
                       fill
                       className="object-contain transition-transform duration-500 group-hover:scale-105 p-4"
                     />
@@ -115,23 +123,23 @@ const Awards = () => {
                   <div className="p-6">
                     <div className="flex items-center justify-between mb-3">
                       <span className="text-xs font-medium px-3 py-1 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300">
-                        {award.date}
+                        {date}
                       </span>
                       <span className={`text-xs font-medium px-3 py-1 rounded-full ${
-                        award.color === 'border-blue-500' 
+                        color === 'border-blue-500' 
                           ? 'bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300' 
-                          : award.color === 'border-emerald-500'
+                          : color === 'border-emerald-500'
                             ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300'
                             : 'bg-amber-50 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300'
                       }`}>
-                        {award.issuer.split(' ')[0]}
+                        {issuer.split(' ')[0]}
                       </span>
                     </div>
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                      {award.title}
+                      {title}
                     </h3>
                     <p className="text-gray-600 dark:text-gray-300 text-sm">
-                      {award.description}
+                      {description}
                     </p>
                   </div>
                 </div>

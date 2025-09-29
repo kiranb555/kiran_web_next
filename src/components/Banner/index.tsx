@@ -57,8 +57,6 @@ const Banner = () => {
               </p>
             </div>
           </motion.div>
-          
-          
           <motion.div 
             className="max-w-8xl mx-auto mb-8"
             {...motionConfig}

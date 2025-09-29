@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic';
 
 
 
-const Header = dynamic(() => import('@/components/header/Header'), {
+const Header = dynamic(() => import('@/components/Header'), {
   ssr: true,
   loading: () => (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
