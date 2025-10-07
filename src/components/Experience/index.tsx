@@ -31,7 +31,7 @@ const Experience = () => {
       role: 'Software Engineer',
       company: 'Digital Fintech Solutions',
       logo: '/logos/fintech-logo.png',
-      duration: 'Sep 2018 - Feb 2021',
+      duration: 'Sep 2018 - Apr 2021',
       location: 'Bangalore, India',
       description: 'Developed and maintained financial applications, focusing on performance and security.',
       skills: ['JavaScript', 'React', 'Redux', 'Node.js', 'MongoDB', 'Python', 'd3.js', 'Three.js']

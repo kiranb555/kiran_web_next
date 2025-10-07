@@ -20,8 +20,8 @@ export function Providers({ children }: { children: ReactNode }) {
     <NextThemesProvider 
       attribute="class" 
       defaultTheme="light"
-      enableSystem={false}
-      disableTransitionOnChange
+      enableSystem
+      // disableTransitionOnChange
     >
       {children}
     </NextThemesProvider>

@@ -3,7 +3,7 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import { LINKEDIN, GITHUB } from '@/utils/constants';
-
+import { useTheme } from 'next-themes';
 // Dynamically import icons with no SSR to reduce bundle size
 const FiGithub = dynamic(() => import('react-icons/fi').then(mod => mod.FiGithub), { ssr: false });
 const FiLinkedin = dynamic(() => import('react-icons/fi').then(mod => mod.FiLinkedin), { ssr: false });
@@ -14,9 +14,9 @@ interface SocialLink {
   url: string;
   icon: React.ReactNode;
 }
-
 const Banner = () => {
   const prefersReducedMotion = useReducedMotion();
+  const { theme } = useTheme();
 
   // Performance: Skip animations if user prefers reduced motion
   const motionConfig = {
@@ -44,7 +44,7 @@ const Banner = () => {
       <div className="w-full mx-auto text-center">
         <motion.div {...motionConfig}>
         <motion.h1 
-            className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-gray-900 dark:text-white"
+            className={`text-4xl sm:text-5xl md:text-6xl font-bold mb-6 ${theme === 'dark' ? 'text-gray-900 dark:text-white' : 'text-gray-100 dark:text-white'}`}
             {...motionConfig}
             transition={{ ...motionConfig.transition, delay: 0.1 }}
           >
