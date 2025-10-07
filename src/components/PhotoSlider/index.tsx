@@ -4,7 +4,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 
 interface PhotoSliderProps {
   photos: string[];
@@ -52,7 +52,7 @@ const PhotoSlider = ({
   const getOptimizedImageUrl = (url: string, width: number) => {
     if (!url) return '';
     // If using an image optimization service, add the parameters here
-    // Example: return `${url}?w=${width}&q=${quality}&auto=format`;
+    return `${url}?w=${width}&q=${quality}&auto=format`;
     return url;
   };
 
@@ -70,7 +70,6 @@ const PhotoSlider = ({
           rel="preload" 
           as="image" 
           href={getOptimizedImageUrl(photos[nextImageIndex], 1080)}
-          // @ts-ignore - imageSrcSet is not in the standard Link types yet
           imageSrcSet={`
             ${getOptimizedImageUrl(photos[nextImageIndex], 640)} 640w,
             ${getOptimizedImageUrl(photos[nextImageIndex], 750)} 750w,

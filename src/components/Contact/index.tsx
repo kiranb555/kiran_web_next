@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FiSend, FiUser, FiMail, FiMessageSquare } from 'react-icons/fi';
-import { EMAIL } from '@/utils/constants';
 
 const Contact = () => {
   const [formData, setFormData] = useState({

@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { TechnologyCard } from "./TechnologyCard";
 import { technologyCategories } from "@/constants/technologies";
-import { useTheme } from "next-themes";
+// import { useTheme } from "next-themes";
 
 const About = () => {
   // Replace these with your actual photo paths

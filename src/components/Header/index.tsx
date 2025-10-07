@@ -1,29 +1,29 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 // import { motion, AnimatePresence } from 'framer-motion';
 // import { FiSun, FiMoon, FiMenu, FiX } from 'react-icons/fi';
-import { useTheme } from 'next-themes';
+// import { useTheme } from 'next-themes';
 
 const Header = () => {
-  const [mounted, setMounted] = useState(false);
+  // const [mounted, setMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const { theme, setTheme } = useTheme();
+  // const { theme, setTheme } = useTheme();
 
   // Set mounted state for animations
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  // useEffect(() => {
+  //   setMounted(true);
+  // }, []);
 
-  const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
-    // Force a small delay to ensure the theme is applied before removing the transition class
-    document.documentElement.classList.add('no-transition');
-    setTimeout(() => {
-      document.documentElement.classList.remove('no-transition');
-    }, 10);
-  };
+  // const toggleTheme = () => {
+  //   setTheme(theme === 'dark' ? 'light' : 'dark');
+  //   // Force a small delay to ensure the theme is applied before removing the transition class
+  //   document.documentElement.classList.add('no-transition');
+  //   setTimeout(() => {
+  //     document.documentElement.classList.remove('no-transition');
+  //   }, 10);
+  // };
 
   // Navigation links
   const navLinks = [
