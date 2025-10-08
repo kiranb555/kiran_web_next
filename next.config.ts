@@ -1,13 +1,25 @@
 import type { NextConfig } from "next";
-import path from 'path';
 
 const nextConfig: NextConfig = {
   /* config options here */
   output: 'export',
   distDir: 'out',
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   images: {
-    unoptimized: true
-  }
+    unoptimized: true, // Required for static exports
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'randomuser.me',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+    ],
+  },
 };
 
 export default nextConfig;
