@@ -3,7 +3,7 @@ import Experience from "@/components/Experience";
 import About from "@/components/About";
 import Awards from "@/components/Awards";
 import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
+// import Footer from "@/components/Footer";
 import Hobby from "@/components/Hobby";
 import ParticlesBackground from "@/components/ParticleBackground";
 
@@ -17,7 +17,7 @@ const Home = () => {
         <Awards />
         <Contact />
         <Hobby />
-        <Footer />
+        {/* <Footer /> */}
     </div>
   );
 }
