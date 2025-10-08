@@ -6,7 +6,7 @@ import { FiGithub, FiLinkedin, FiMail } from 'react-icons/fi';
 import { AiFillHeart } from 'react-icons/ai';
 import { EMAIL, GITHUB, LINKEDIN, NAME, LOCATION, PHONE } from '@/utils/constants';
 
-const Footer = () => {
+const FooterComponent = () => {
   const currentYear = new Date().getFullYear();
   
   const socialLinks = [
@@ -130,4 +130,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default FooterComponent;
