@@ -44,7 +44,7 @@ const Banner = () => {
       <div className="w-full mx-auto text-center">
         <motion.div {...motionConfig}>
         <motion.h1 
-            className={`text-4xl sm:text-5xl md:text-6xl font-bold mb-6 ${theme === 'dark' ? 'text-gray-900 dark:text-white' : 'text-gray-100 dark:text-white'}`}
+            className={`text-4xl sm:text-5xl md:text-6xl font-bold mb-6 text-gray-900`}
             {...motionConfig}
             transition={{ ...motionConfig.transition, delay: 0.1 }}
           >
