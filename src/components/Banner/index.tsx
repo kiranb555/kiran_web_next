@@ -40,7 +40,7 @@ const Banner = () => {
   ];
 
   return (
-    <section className="min-h-[60vh] lg:min-h-screen flex items-center justify-center dark:bg-transparent px-4 sm:px-6 lg:px-8">
+    <section className="min-h-screen flex items-center justify-center dark:bg-transparent px-4 sm:px-6 lg:px-8">
       <div className="w-full mx-auto text-center">
         <motion.div {...motionConfig}>
         <motion.h1 
