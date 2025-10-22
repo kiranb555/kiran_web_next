@@ -9,7 +9,7 @@ import { technologyCategories } from "@/constants/technologies";
 
 const About = () => {
   // Replace these with your actual photo paths
-  const profilePhoto = "/photos/profile.jpeg"; // Add your profile photo to public folder
+  const profilePhoto = `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/profile.jpeg`;
 
   const getExperience = () => {
     return new Date().getFullYear() - 2018;

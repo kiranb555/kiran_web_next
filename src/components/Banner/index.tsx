@@ -73,7 +73,7 @@ const Banner = () => {
             transition={{ ...motionConfig.transition, delay: 0.3 }}
           >
           <a
-              href="/Kiran_SSE_2025.pdf"
+              href={`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/Kiran_SSE_2025.pdf`}
               target="_blank"
               rel="noopener noreferrer"
               download="Kiran_SSE_2025.pdf"
