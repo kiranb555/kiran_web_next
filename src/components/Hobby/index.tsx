@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 import PhotoSlider from "../PhotoSlider";
 
 const photographyPhotos = [
-  `/photography/photo1.jpeg`,
-  `/photography/photo2.jpeg`,
-  `/photography/photo3.jpeg`,
+  `/photography/Photo1.jpeg`,
+  `/photography/Photo2.jpeg`,
+  `/photography/Photo3.jpeg`,
 ];
 
 const Hobby = () => {

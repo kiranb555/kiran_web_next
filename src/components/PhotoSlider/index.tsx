@@ -55,7 +55,6 @@ console.log({ photos })
   //   return `${url}?w=${width}&q=${quality}&auto=format`;
   //   return url;
   // };
-console.log({ photos, nextImageIndex})
   return (
     <div 
       className="relative w-full h-64 md:h-96 overflow-hidden rounded-lg dark:bg-gray-800"
