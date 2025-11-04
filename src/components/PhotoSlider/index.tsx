@@ -49,12 +49,12 @@ const PhotoSlider = ({
   }, [currentIndex, isPaused, photos.length, autoSlideInterval]);
 
   // Generate optimized image URL with query parameters
-  const getOptimizedImageUrl = (url: string, width: number) => {
-    if (!url) return '';
-    // If using an image optimization service, add the parameters here
-    return `${url}?w=${width}&q=${quality}&auto=format`;
-    return url;
-  };
+  // const getOptimizedImageUrl = (url: string, width: number) => {
+  //   if (!url) return '';
+  //   // If using an image optimization service, add the parameters here
+  //   return `${url}?w=${width}&q=${quality}&auto=format`;
+  //   return url;
+  // };
 
   return (
     <div 
@@ -69,11 +69,11 @@ const PhotoSlider = ({
         <link 
           rel="preload" 
           as="image" 
-          href={getOptimizedImageUrl(photos[nextImageIndex], 1080)}
+          href={photos[nextImageIndex]}
           imageSrcSet={`
-            ${getOptimizedImageUrl(photos[nextImageIndex], 640)} 640w,
-            ${getOptimizedImageUrl(photos[nextImageIndex], 750)} 750w,
-            ${getOptimizedImageUrl(photos[nextImageIndex], 1080)} 1080w
+            ${photos[nextImageIndex]} 640w,
+            ${photos[nextImageIndex]} 750w,
+            ${photos[nextImageIndex]} 1080w
           `}
         />
       )}
