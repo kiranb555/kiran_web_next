@@ -19,7 +19,7 @@ const PhotoSlider = ({
 }: PhotoSliderProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-
+console.log({ photos })
   // Calculate next image index for preloading
   const nextImageIndex = useMemo(() => 
     currentIndex === photos.length - 1 ? 0 : currentIndex + 1
@@ -55,7 +55,7 @@ const PhotoSlider = ({
   //   return `${url}?w=${width}&q=${quality}&auto=format`;
   //   return url;
   // };
-
+console.log({ photos, nextImageIndex})
   return (
     <div 
       className="relative w-full h-64 md:h-96 overflow-hidden rounded-lg dark:bg-gray-800"
