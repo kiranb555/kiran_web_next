@@ -1,0 +1,6 @@
+This favicon was generated using the following font:
+
+- Font Title: Noto Sans Kannada
+- Font Author: undefined
+- Font Source: https://fonts.gstatic.com/s/notosanskannada/v30/8vIs7xs32H97qzQKnzfeXycxXZyUmySvZWItmf1fe6TVmgop9ndpS-BqHEyGrDvNzSIMLsPKrkY.ttf
+- Font License: undefined)
