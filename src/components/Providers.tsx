@@ -13,7 +13,7 @@ export function Providers({ children }: { children: ReactNode }) {
 
   // Don't render anything until we're mounted to avoid hydration mismatches
   if (!mounted) {
-    return <div className="min-h-screen">{children}</div>;
+    return <>{children}</>;
   }
 
   return (

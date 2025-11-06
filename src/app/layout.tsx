@@ -56,16 +56,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <Providers>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100`}
-        >
-          <div className="min-h-screen dark:bg-gray-900">
-            <Header />
-            <main className="bg-inherit text-inherit">{children}</main>
-          </div>
+          className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 min-h-screen`}
+          >
+          <Providers>
+              <Header />
+              <main className="bg-inherit text-inherit">{children}</main>
+         </Providers>
         </body>
-      </Providers>
     </html>
   );
 }
