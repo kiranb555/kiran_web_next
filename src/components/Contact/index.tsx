@@ -1,29 +1,22 @@
 "use client";
+
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { FiSend, FiUser, FiMail, FiMessageSquare } from 'react-icons/fi';
+import { PaperAirplaneIcon, UserIcon, EnvelopeIcon, ChatBubbleLeftIcon } from '@heroicons/react/24/outline';
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Basic validation
+
     if (!formData.name || !formData.email || !formData.message) {
       setStatus('error');
       setErrorMessage('Please fill in all fields');
@@ -39,27 +32,18 @@ const Contact = () => {
     }
 
     setStatus('sending');
-    
+
     try {
       const response = await fetch('/api/sendMail', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-
       const data = await response.json();
 
       if (data.success) {
         setStatus('success');
         setFormData({ name: '', email: '', message: '' });
-        
-        // In development, log the preview URL
-        if (process.env.NODE_ENV === 'development' && data.previewUrl) {
-          console.log('Email preview:', data.previewUrl);
-        }
-        
         setTimeout(() => setStatus('idle'), 3000);
       } else {
         throw new Error(data.message || 'Failed to send message');
@@ -72,17 +56,22 @@ const Contact = () => {
     }
   };
 
+  const inputClass = "w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-400 dark:focus:border-indigo-600 outline-none transition-all duration-200";
+  const labelClass = "text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2 mb-2";
+
   return (
-    <section className="py-2 dark:bg-gray-950">
+    <section id="contact" className="py-24 bg-gray-50 dark:bg-gray-900/50">
       <div className="container mx-auto px-4">
-        <div className="max-w-3xl mx-auto text-center mb-12">
-          <span className="text-sm font-medium text-amber-600 dark:text-amber-400">
-            Get In Touch
-          </span>
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mt-2">
-            Contact Me
+        {/* Section header */}
+        <div className="text-center mb-16">
+          <span className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 tracking-widest uppercase mb-3 block">Contact</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white">
+            Let&apos;s{' '}
+            <span className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">Connect</span>
           </h2>
-          <div className="w-16 h-0.5 bg-amber-500 mx-auto mt-3"></div>
+          <p className="mt-4 text-gray-500 dark:text-gray-400 max-w-md mx-auto">
+            Have a project in mind or just want to chat? I&apos;d love to hear from you.
+          </p>
         </div>
 
         <motion.div
@@ -92,99 +81,99 @@ const Contact = () => {
           transition={{ duration: 0.6 }}
           className="max-w-2xl mx-auto"
         >
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="space-y-1">
-              <label htmlFor="name" className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center">
-                <FiUser className="mr-2" /> Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent transition"
-                placeholder="Your name"
-                disabled={status === 'sending'}
-              />
-            </div>
+          <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-xl shadow-gray-200/50 dark:shadow-black/30 p-8">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label htmlFor="name" className={labelClass}>
+                  <UserIcon className="w-4 h-4 text-indigo-500" /> Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className={inputClass}
+                  placeholder="Your name"
+                  disabled={status === 'sending'}
+                />
+              </div>
 
-            <div className="space-y-1">
-              <label htmlFor="email" className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center">
-                <FiMail className="mr-2" /> Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent transition"
-                placeholder="your.email@example.com"
-                disabled={status === 'sending'}
-              />
-            </div>
+              <div>
+                <label htmlFor="email" className={labelClass}>
+                  <EnvelopeIcon className="w-4 h-4 text-indigo-500" /> Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className={inputClass}
+                  placeholder="your.email@example.com"
+                  disabled={status === 'sending'}
+                />
+              </div>
 
-            <div className="space-y-1">
-              <label htmlFor="message" className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-start">
-                <FiMessageSquare className="mr-2 mt-1 flex-shrink-0" /> 
-                <span>Message</span>
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows={5}
-                value={formData.message}
-                onChange={handleChange}
-                required
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent transition resize-none"
-                placeholder="Your message here..."
-                disabled={status === 'sending'}
-              ></textarea>
-            </div>
+              <div>
+                <label htmlFor="message" className={labelClass}>
+                  <ChatBubbleLeftIcon className="w-4 h-4 text-indigo-500" /> Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={5}
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                  className={inputClass + ' resize-none'}
+                  placeholder="Your message..."
+                  disabled={status === 'sending'}
+                />
+              </div>
 
-            <div className="pt-2">
               <motion.button
                 type="submit"
                 disabled={status === 'sending'}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className={`w-full flex items-center justify-center px-6 py-3 rounded-lg font-medium text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition-colors ${
-                  status === 'sending' ? 'opacity-70 cursor-not-allowed' : ''
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.99 }}
+                className={`w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-white bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 transition-all duration-300 ${
+                  status === 'sending' ? 'opacity-60 cursor-not-allowed' : ''
                 }`}
               >
                 {status === 'sending' ? (
                   'Sending...'
                 ) : (
                   <>
-                    <FiSend className="mr-2" /> Send Message
+                    <PaperAirplaneIcon className="w-4 h-4" />
+                    Send Message
                   </>
                 )}
               </motion.button>
 
               {status === 'success' && (
                 <motion.p
-                  initial={{ opacity: 0, y: -10 }}
+                  initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="mt-4 text-center text-green-600 dark:text-green-400 text-sm"
+                  className="text-center text-emerald-600 dark:text-emerald-400 text-sm font-medium"
                 >
-                  Thank you! Your message has been sent successfully.
+                  Message sent! I&apos;ll get back to you soon.
                 </motion.p>
               )}
 
               {status === 'error' && (
                 <motion.p
-                  initial={{ opacity: 0, y: -10 }}
+                  initial={{ opacity: 0, y: -8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="mt-4 text-center text-red-600 dark:text-red-400 text-sm"
+                  className="text-center text-red-500 dark:text-red-400 text-sm font-medium"
                 >
                   {errorMessage}
                 </motion.p>
               )}
-            </div>
-          </form>
+            </form>
+          </div>
         </motion.div>
       </div>
     </section>

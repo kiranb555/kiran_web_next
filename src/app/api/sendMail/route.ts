@@ -28,19 +28,15 @@ export async function POST(request: Request) {
     };
     
     await transporter.sendMail(mailOptions);
-    
+
     return new Response(
-      JSON.stringify({ 
-        message: 'Message sent successfully! We will get back to you soon.' 
-      }),
+      JSON.stringify({ success: true, message: 'Message sent successfully!' }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
   } catch (error) {
     console.error('Error sending email:', error);
     return new Response(
-      JSON.stringify({ 
-        message: 'Failed to send message' 
-      }),
+      JSON.stringify({ success: false, message: 'Failed to send message. Please try again.' }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }

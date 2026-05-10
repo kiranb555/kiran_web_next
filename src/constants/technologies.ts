@@ -67,4 +67,15 @@ export const technologyCategories: TechnologyCategory[] = [
       'Kubernetes',
     ],
   },
+  {
+    id: 'AI',
+    title: 'Artificial Intelligence',
+    icon: DataCloudIcon,
+    technologies: [
+      'Python',
+      'Windsurf',
+      'Claude',
+      'Codex'
+    ],
+  }
 ];
