@@ -13,8 +13,6 @@ const nextConfig: NextConfig = {
   ...(isGHPages && { basePath }),
   // Enable trailing slashes for better compatibility
   trailingSlash: true,
-  // Disable ESLint during builds
-  eslint: { ignoreDuringBuilds: true },
   // Image optimization settings
   images: {
     // Disable image optimization for static exports
