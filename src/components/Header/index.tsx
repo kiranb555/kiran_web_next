@@ -30,13 +30,24 @@ const Header = () => {
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    if (href === '#home') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      const element = document.querySelector(href);
-      if (element) element.scrollIntoView({ behavior: 'smooth' });
-    }
+    const wasOpen = isOpen;
     setIsOpen(false);
+    const doScroll = () => {
+      if (href === '#home') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        const element = document.querySelector(href);
+        if (element) {
+          const top = element.getBoundingClientRect().top + window.scrollY - 64;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      }
+    };
+    if (wasOpen) {
+      setTimeout(doScroll, 250);
+    } else {
+      doScroll();
+    }
   };
 
   return (

@@ -140,7 +140,7 @@ const Awards = () => {
         </div>
 
         {/* Pagination dots */}
-        <div className="flex justify-center mt-10 gap-2" id="contact">
+        <div className="flex justify-center mt-10 gap-2">
           {Array.from({ length: totalPages }).map((_, index) => (
             <button
               key={index}

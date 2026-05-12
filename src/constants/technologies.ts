@@ -16,11 +16,12 @@ export const technologyCategories: TechnologyCategory[] = [
     technologies: [
       'JavaScript (ES6+)',
       'TypeScript',
-      'React.js',
-      'Next.js',
-      'Redux',
-      'HTML5/CSS3',
-      'Tailwind CSS',
+      'React.js/Next.js',
+      'Redux/Zustand/Tanstack',
+      'Tailwind CSS/Scss',
+      'ShadCN/Material-UI',
+      'd3.js/Three.js/Canvas',
+      'RTL/playwright',
     ],
   },
   {

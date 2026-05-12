@@ -56,7 +56,7 @@ const About = () => {
                 <span className="font-medium text-gray-900 dark:text-white">React</span> and{' '}
                 <span className="font-medium text-gray-900 dark:text-white">Node.js</span> — with a strong focus on performance, clean architecture, and seamless user experiences.
               </p>
-              <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed" id="technologies">
+              <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
                 I&apos;m particularly passionate about{' '}
                 <span className="font-medium text-gray-900 dark:text-white">progressive web applications</span>,{' '}
                 <span className="font-medium text-gray-900 dark:text-white">cloud architecture</span>, and{' '}
@@ -103,6 +103,7 @@ const About = () => {
 
           {/* Technologies Section */}
           <motion.div
+            id="technologies"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
